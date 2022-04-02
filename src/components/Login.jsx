@@ -6,6 +6,8 @@ import {
   signInWithEmailAndPassword 
 } from "firebase/auth";
 import { collection, addDoc } from "firebase/firestore";
+import {useNavigate} from 'react-router-dom'
+
 
 const auth = getAuth(fireApp);
 
@@ -14,6 +16,8 @@ const Login = () => {
   const [password, setPassword] = React.useState("");
   const [error, setError] = React.useState(null);
   const [isRegistro, setIsRegistro] = React.useState(false)
+
+  const navigate = useNavigate()
 
   const recibirDatos = (e) => {
     e.preventDefault();
@@ -47,6 +51,10 @@ const Login = () => {
       try {
         const res = await signInWithEmailAndPassword(auth, email, password)
         console.log(res)
+        setEmail('')
+        setPassword('')
+        setError(null)
+        navigate('/admin')
       } catch (error) {
         console.log(error);
         if(error.message === 'Firebase: Error (auth/user-not-found).'){
@@ -57,7 +65,7 @@ const Login = () => {
         }
       }
     },
-    [email, password],
+    [email, password, navigate],
   )
 
   const registrar = React.useCallback(
@@ -71,6 +79,7 @@ const Login = () => {
         setEmail('')
         setPassword('')
         setError(null)
+        navigate('/admin')
         console.log(res);
       } catch (error) {
         console.log(error);
@@ -82,7 +91,7 @@ const Login = () => {
         }
       }
     },
-    [email, password],
+    [email, password, navigate],
   )
   
 
