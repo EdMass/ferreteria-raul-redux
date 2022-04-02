@@ -1,5 +1,11 @@
 import React from "react";
+import fireApp from "../firebase/firebase";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
 
+const auth = getAuth(fireApp);
 
 const Login = () => {
   const [email, setEmail] = React.useState("");
@@ -26,7 +32,24 @@ const Login = () => {
 
     setError(null)
 
+    if(isRegistro){
+      registrar()
+    }
+
   };
+
+  const registrar = React.useCallback(
+    async() => {
+      try {
+        await createUserWithEmailAndPassword(auth ,email, password)
+      } catch (error) {
+        console.log(error);
+        setError(error.message)
+      }
+    },
+    [email, password],
+  )
+  
 
   return (
     <div className="mt-6">

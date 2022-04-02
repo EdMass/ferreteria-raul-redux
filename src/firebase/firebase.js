@@ -1,22 +1,17 @@
-import 'firebase/firebase'
-import app from 'firebase/app';
-import 'firebase/auth';
+import { initializeApp } from "firebase/app";
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCvLnicXAoLHXimKMBKxXfZdaVqKkTg6X0",
-    authDomain: "ferreteriadonraul-6b205.firebaseapp.com",
-    projectId: "ferreteriadonraul-6b205",
-    storageBucket: "ferreteriadonraul-6b205.appspot.com",
-    messagingSenderId: "122436323292",
-    appId: "1:122436323292:web:6541ee249cb0820f36b119",
-    measurementId: "G-3YB003VNB0"
-  };
+  apiKey: "AIzaSyCvLnicXAoLHXimKMBKxXfZdaVqKkTg6X0",
+  authDomain: "ferreteriadonraul-6b205.firebaseapp.com",
+  projectId: "ferreteriadonraul-6b205",
+  storageBucket: "ferreteriadonraul-6b205.appspot.com",
+  messagingSenderId: "122436323292",
+  appId: "1:122436323292:web:6541ee249cb0820f36b119",
+  measurementId: "G-3YB003VNB0"
+};
   
   // Initialize Firebase
-  const fireapp = app.initializedApp(firebaseConfig);
+  const fireApp = initializeApp(firebaseConfig);
 
-  const db = fireapp.firestore()
-  const auth = fireapp.auth()
-
-  export { db, auth }
+  export default fireApp;
