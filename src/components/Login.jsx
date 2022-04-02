@@ -3,6 +3,7 @@ import fireApp, {db} from "../firebase/firebase";
 import {
   getAuth,
   createUserWithEmailAndPassword,
+  signInWithEmailAndPassword 
 } from "firebase/auth";
 import { collection, addDoc } from "firebase/firestore";
 
@@ -12,7 +13,7 @@ const Login = () => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [error, setError] = React.useState(null);
-  const [isRegistro, setIsRegistro] = React.useState(true)
+  const [isRegistro, setIsRegistro] = React.useState(false)
 
   const recibirDatos = (e) => {
     e.preventDefault();
@@ -35,9 +36,29 @@ const Login = () => {
 
     if(isRegistro){
       registrar()
+    }else{
+      login()
     }
 
   };
+
+  const login = React.useCallback(
+    async() => {
+      try {
+        const res = await signInWithEmailAndPassword(auth, email, password)
+        console.log(res)
+      } catch (error) {
+        console.log(error);
+        if(error.message === 'Firebase: Error (auth/user-not-found).'){
+          setError('El email es incorrecto o no está registrado')
+        }
+        if(error.message === 'Firebase: Error (auth/wrong-password).'){
+          setError('El password es incorrecto o el email no está registrado')
+        }
+      }
+    },
+    [email, password],
+  )
 
   const registrar = React.useCallback(
     async() => {
