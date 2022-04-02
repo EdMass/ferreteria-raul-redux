@@ -15,7 +15,7 @@ const Login = () => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [error, setError] = React.useState(null);
-  const [isRegistro, setIsRegistro] = React.useState(false)
+  const [isRegistro, setIsRegistro] = React.useState(true)
 
   const navigate = useNavigate()
 
