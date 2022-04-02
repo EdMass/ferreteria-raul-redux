@@ -1,15 +1,16 @@
 import React from "react";
-import fireApp from "../firebase/firebase";
+import fireApp, {db} from "../firebase/firebase";
 import {
   getAuth,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
+import { collection, addDoc } from "firebase/firestore";
 
 const auth = getAuth(fireApp);
 
 const Login = () => {
   const [email, setEmail] = React.useState("");
-  const [password, setpassword] = React.useState("");
+  const [password, setPassword] = React.useState("");
   const [error, setError] = React.useState(null);
   const [isRegistro, setIsRegistro] = React.useState(true)
 
@@ -41,10 +42,23 @@ const Login = () => {
   const registrar = React.useCallback(
     async() => {
       try {
-        await createUserWithEmailAndPassword(auth ,email, password)
+        const res = await createUserWithEmailAndPassword(auth ,email, password)
+        await addDoc(collection(db, "usuarios"), {
+          email: res.user.email,
+          uid: res.user.uid
+        });
+        setEmail('')
+        setPassword('')
+        setError(null)
+        console.log(res);
       } catch (error) {
         console.log(error);
-        setError(error.message)
+        if(error.message === 'Firebase: Error (auth/invalid-email).'){
+          setError('El email no es válido')
+        }
+        if(error.message === 'Firebase: Error (auth/email-already-in-use).'){
+          setError('El email ya está registrado')
+        }
       }
     },
     [email, password],
@@ -74,7 +88,7 @@ const Login = () => {
               type="password"
               className="form-control mb-2"
               placeholder="Ingrese un password"
-              onChange={(e) => setpassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
               value={password}
             />
             <div className="pagination gap-2 d-md-flex justify-content-center">
