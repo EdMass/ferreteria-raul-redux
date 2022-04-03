@@ -8,7 +8,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup
 } from "firebase/auth";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, setDoc, doc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
 const auth = getAuth(fireApp);
@@ -96,8 +96,23 @@ const Login = () => {
   
 const SignInGoogle = async() => {
   await signInWithPopup(auth, googleAuth)
-  .then((result) => {  
-     addDoc(collection(db, "usuarios"), {
+  .then(async (result) => {  
+    await setDoc(doc(db, "usuarios", "google"), {
+      email: result.user.email,
+      uid: result.user.uid,
+    });
+    navigate("/admin");
+  }).catch((error) => {
+    console.log(error.code);
+    console.log(error.message);
+  });
+}
+
+const SignInGitHub = () => {
+   signInWithPopup(auth, githubAuth)
+  .then(async (result) => {  
+    console.log(result)
+    await setDoc(doc(db, "usuarios", "github"), {
       email: result.user.email,
       uid: result.user.uid,
     });
@@ -158,7 +173,7 @@ const SignInGoogle = async() => {
             <button
               className="btn btn-dark btn-sm d-md-flex"
               style={{ margin: "0 auto" }}
-              
+              onClick={SignInGitHub}
             >
               Accede con GitHub
             </button>
