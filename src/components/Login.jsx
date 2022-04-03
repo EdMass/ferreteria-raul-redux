@@ -4,9 +4,9 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  GithubAuthProvider, 
+  GithubAuthProvider,
   GoogleAuthProvider,
-  signInWithPopup
+  signInWithPopup,
 } from "firebase/auth";
 import { collection, addDoc, setDoc, doc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
@@ -16,7 +16,6 @@ const auth = getAuth(fireApp);
 const googleAuth = new GoogleAuthProvider();
 
 const githubAuth = new GithubAuthProvider();
-
 
 const Login = () => {
   const [email, setEmail] = React.useState("");
@@ -93,35 +92,37 @@ const Login = () => {
       }
     }
   }, [email, password, navigate]);
-  
-const SignInGoogle = async() => {
-  await signInWithPopup(auth, googleAuth)
-  .then(async (result) => {  
-    await setDoc(doc(db, "usuarios", "google"), {
-      email: result.user.email,
-      uid: result.user.uid,
-    });
-    navigate("/admin");
-  }).catch((error) => {
-    console.log(error.code);
-    console.log(error.message);
-  });
-}
 
-const SignInGitHub = () => {
-   signInWithPopup(auth, githubAuth)
-  .then(async (result) => {  
-    console.log(result)
-    await setDoc(doc(db, "usuarios", "github"), {
-      email: result.user.email,
-      uid: result.user.uid,
-    });
-    navigate("/admin");
-  }).catch((error) => {
-    console.log(error.code);
-    console.log(error.message);
-  });
-}
+  const SignInGoogle = async () => {
+    await signInWithPopup(auth, googleAuth)
+      .then(async (result) => {
+        await setDoc(doc(db, "usuarios", "google"), {
+          email: result.user.email,
+          uid: result.user.uid,
+        });
+        navigate("/admin");
+      })
+      .catch((error) => {
+        console.log(error.code);
+        console.log(error.message);
+      });
+  };
+
+  const SignInGitHub = async () => {
+    await signInWithPopup(auth, githubAuth)
+      .then(async (result) => {
+        console.log(result);
+        await setDoc(doc(db, "usuarios", "github"), {
+          email: result.user.email,
+          uid: result.user.uid,
+        });
+        navigate("/admin");
+      })
+      .catch((error) => {
+        console.log(error.code);
+        console.log(error.message);
+      });
+  };
 
   return (
     <div className="mt-6">
@@ -161,20 +162,24 @@ const SignInGitHub = () => {
             </div>
           </form>
           <hr />
-          <div className="justify-content-center">
+          <div className="row justify-content-center">
             <button
-              className="btn btn-dark btn-sm d-md-flex mb-2"
+              className="btn btn-dark btn-sm mt-2 mb-2"
+              type="button"
               style={{ margin: "0 auto" }}
               onClick={SignInGoogle}
             >
+              <i className="fa-brands fa-google me-2 "></i>
               Accede con Google
             </button>
-            
+
             <button
-              className="btn btn-dark btn-sm d-md-flex"
+              className="btn btn-dark btn-sm  "
+              type="button"
               style={{ margin: "0 auto" }}
               onClick={SignInGitHub}
             >
+              <i class="fa-brands fa-github-alt me-2"></i>
               Accede con GitHub
             </button>
           </div>
