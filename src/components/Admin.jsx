@@ -8,7 +8,7 @@ const auth = getAuth(fireApp);
 const Admin = () => {
     const [user, setUser] = useState(null);
   const navigate = useNavigate();
-  const red = React.useEffect(() => {
+  React.useEffect(() => {
     if (auth.currentUser) {
       console.log("existe el usuario");
       setUser(auth.currentUser)
@@ -16,9 +16,15 @@ const Admin = () => {
       console.log("no existe el usuario");
       navigate("/login");
     }
-  }, []);
+  }, [navigate]);
 
-  return <div>{red}</div>;
+  return <div>
+      {
+          user && (
+              <h3>{user.email}</h3>
+          )
+        }
+        </div>;
 };
 
 export default Admin;
