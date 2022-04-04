@@ -103,9 +103,11 @@ const Login = () => {
         navigate("/admin");
       })
       .catch((error) => {
+        if (error.message === "Firebase: Error (auth/invalid-email).") {
+          setError("El email Ya está autenticado con GitHub");}
         console.log(error.code);
         console.log(error.message);
-      });
+    });
   };
 
   const SignInGitHub = async () => {
@@ -119,6 +121,8 @@ const Login = () => {
         navigate("/admin");
       })
       .catch((error) => {
+        error.message === "Firebase: Error (auth/invalid-email)." &&
+        setError("El email Ya está autenticado con Google");
         console.log(error.code);
         console.log(error.message);
       });

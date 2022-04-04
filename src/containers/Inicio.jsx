@@ -10,7 +10,7 @@ const Inicio = () => {
           <h2>Para iniciar sesión o regístrarte dirígete a la pesataña Login</h2>
         </center>
       </div>
-      <img src={LogoInicio} className="img" />
+      <img src={LogoInicio} className="img" alt="Logo" />
       <div className="container"></div>
     </div>
   );

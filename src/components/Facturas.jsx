@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { obtenerFacturaAccion } from "../redux/facturaDucks";
+import { generarPDF } from "./GenerarPdf";
 
 const Facturas = () => {
   const productos = [];
@@ -9,13 +10,15 @@ const Facturas = () => {
 
   const factura = useSelector((store) => store.factura.array);
 
+  const handlerFactura = (item) => {
+    generarPDF(item);
+  };
+
   console.log(productos);
   React.useEffect(() => {
-    
     dispatch(obtenerFacturaAccion());
   }, [dispatch]);
 
-  
   return (
     <div>
       <br />
@@ -27,16 +30,25 @@ const Facturas = () => {
                 <h5>Factura # {item.consecutivo}</h5>
                 <h5>Ferreteria Don Raul</h5>
                 <p>Productos: </p>
-                {item.listaProductos.map(p => {
-                    return(
-                        <div key={p.id} >
-                            <p>Nombre {p.nombre} {p.precio}  1</p>
-                        </div>
-                    )
+                {item.listaProductos.map((p) => {
+                  return (
+                    <div key={p.id}>
+                      <p>
+                        Nombre: {p.nombre} Precio:{p.precio} Cantidad: x{" "}
+                      </p>
+                    </div>
+                  );
                 })}
                 {console.log(item)}
 
                 <p>Total: {item.total} </p>
+                <button
+                  type="button"
+                  className="btn btn-dark btn-lg page"
+                  onClick={() => handlerFactura(item)}
+                >
+                  Imprimir
+                </button>
               </div>
             </div>
           </div>

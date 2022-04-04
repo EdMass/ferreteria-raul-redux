@@ -45,7 +45,7 @@ const Admin = () => {
     }
   }, [navigate]);
 
-  return (
+  return user !== null ? (
     <div className="">
        <div
       className="btn-group"
@@ -69,6 +69,17 @@ const Admin = () => {
       </Routes>
     </div>
    
+  ): (
+    <center>
+      <button className="btn btn-primary" type="button" disabled>
+        <span
+          className="spinner-grow spinner-grow-sm"
+          role="status"
+          aria-hidden="true"
+        ></span>
+        Loading...
+      </button>
+    </center>
   );
 };
 
