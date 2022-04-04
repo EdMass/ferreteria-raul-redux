@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import fireApp from "../firebase/firebase";
 import { getAuth } from "firebase/auth";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import Clientes from "./Clientes";
-import Productos from "./Productos";
-import Vendedor from "./Vendedor";
-import Proveedor from "./Proveedor";
-import Facturas from "./Facturas";
+import Clientes from "../components/Clientes";
+import Productos from "../components/Productos";
+import Vendedor from "../components/Vendedor";
+import Proveedor from "../components/Proveedor";
+import Facturas from "../components/Facturas";
 
 const auth = getAuth(fireApp);
 
