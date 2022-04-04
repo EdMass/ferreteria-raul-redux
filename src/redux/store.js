@@ -6,13 +6,15 @@ import clienteReducer from './clienteDucks'
 import productoReducer from './productoDucks'
 import vendedorReducer from './vendedorDucks'
 import proveedorReducer from './proveedorDucks'
+import facturaReducer from './facturaDucks'
 
  
 const rootReducer = combineReducers({
     clientes: clienteReducer,
     productos : productoReducer,
     vendedor : vendedorReducer,
-    proveedor : proveedorReducer  
+    proveedor : proveedorReducer , 
+    factura : facturaReducer
 })
  
 export default function generateStore() {

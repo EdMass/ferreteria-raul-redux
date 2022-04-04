@@ -6,6 +6,7 @@ import Clientes from "./Clientes";
 import Productos from "./Productos";
 import Vendedor from "./Vendedor";
 import Proveedor from "./Proveedor";
+import Facturas from "./Facturas";
 
 const auth = getAuth(fireApp);
 
@@ -30,12 +31,16 @@ const Admin = () => {
     navigate("/admin/proveedor");
   };
 
+  const handlerFacturas = () => {
+    navigate("/admin/factura");
+  };
+
   React.useEffect(() => {
     if (auth.currentUser) {
-      console.log("existe el usuario");
+      
       setUser(auth.currentUser);
     } else {
-      console.log("no existe el usuario");
+    
       navigate("/login");
     }
   }, [navigate]);
@@ -43,14 +48,15 @@ const Admin = () => {
   return (
     <div className="">
        <div
-      class="btn-group"
+      className="btn-group"
       role="group"
       aria-label="Basic example"
     >
-  <button type="button" className="btn btn-dark btn-lg" onClick={handlerCliente}>Clientes</button>
-  <button type="button" className="btn btn-dark btn-lg" onClick={handlerProducto} >Productos</button>
-  <button type="button" className="btn btn-dark btn-lg" onClick={handlerVendedor}>Vendedor</button>  
-  <button type="button" className="btn btn-dark btn-lg" onClick={handlerProveedor}>Proveedor</button>    
+  <button type="button" className="btn btn-dark btn-lg page" onClick={handlerCliente}>Clientes</button>
+  <button type="button" className="btn btn-dark btn-lg page" onClick={handlerProducto} >Productos</button>
+  <button type="button" className="btn btn-dark btn-lg page" onClick={handlerVendedor}>Vendedor</button>  
+  <button type="button" className="btn btn-dark btn-lg page" onClick={handlerProveedor}>Proveedor</button>
+  <button type="button" className="btn btn-dark btn-lg page" onClick={handlerFacturas}>Factura</button>     
       
     </div>
     <br />
@@ -59,6 +65,7 @@ const Admin = () => {
         <Route path="/productos" element={<Productos />} />
         <Route path="/vendedor" element={<Vendedor />} />
         <Route path="/proveedor" element={<Proveedor />} />
+        <Route path="/factura" element={<Facturas />} />
       </Routes>
     </div>
    
@@ -66,15 +73,3 @@ const Admin = () => {
 };
 
 export default Admin;
-/*
- {user && <h3>{user.email}</h3>}
-<button
-        className="btn btn-dark btn-sm  "
-        type="button"
-        style={{ margin: "0 auto" }}
-        
-      >
-        
-      </button>
-
-*/

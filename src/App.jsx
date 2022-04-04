@@ -5,6 +5,7 @@ import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import fireApp from "./firebase/firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import './styles/styles.scss'
 
 const auth = getAuth(fireApp);
 
@@ -14,7 +15,7 @@ function App() {
 
   React.useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      console.log(user)
+      
       if(user){
         setFirebaseUser(user)
       }else{
@@ -37,7 +38,7 @@ function App() {
       </div>
     </Router>
   ) : <button className="btn btn-primary" type="button" disabled>
-  <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+  <span className="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
   Loading...
 </button>
 }
