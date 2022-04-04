@@ -7,25 +7,32 @@ const Clientes = () => {
     const dispatch = useDispatch()
 
     const clientes = useSelector(store => store.clientes.array)
-    console.log(clientes)
 
+    React.useEffect(() => {
+        dispatch(obtenerClientesAccion()) 
+      }, [dispatch])
 
   return (
     <div>
-        Clientes
         <br />
-        <button onClick={() => dispatch(obtenerClientesAccion()) }>Obtener Clientes</button>
-        <ul>
-            {
-                clientes.map(item =>(
-                    <li key={item.id} >
-                        Nombre: {item.nombre}, Documento: {item.idCliente}, Celular: {item.celular} 
-                    </li>
-                ))
-            }
-        </ul>
+       <div className="row">
+        {clientes.map((item) => (
+          <div key={item.id} className="col mb-4">
+            <div className="card" style={{ minWidth: "230px" }}>
+              
+              <div className="card-body">
+                <h5>{item.nombre}</h5>
+                <p>Documento: {item.idCliente}</p>
+                <p>Celular: {item.celular} </p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+        
     </div>
   )
 }
 
 export default Clientes
+

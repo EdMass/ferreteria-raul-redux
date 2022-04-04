@@ -7,23 +7,30 @@ const Productos = () => {
     const dispatch = useDispatch()
 
     const productos = useSelector(store => store.productos.array)
-    console.log(productos)
+
+    React.useEffect(() => {
+        dispatch(obtenerProductoAccion()) 
+      }, [dispatch])
 
 
   return (
     <div>
-        Productos
-        <br />
-        <button onClick={() => dispatch(obtenerProductoAccion()) }>Obtener Productos</button>
-        <ul>
-            {
-                productos.map(item =>(
-                    <li key={item.id} >
-                        Nombre: {item.nombre}, Precio: {item.precio}, Almecenados: {item.almacenados} 
-                    </li>
-                ))
-            }
-        </ul>
+         <br />
+       <div className="row">
+        {productos.map((item) => (
+          <div key={item.id} className="col mb-4">
+            <div className="card" style={{ minWidth: "230px" }}>
+              
+              <div className="card-body">
+                <h5>{item.nombre}</h5>
+                <p>Precio: {item.precio}</p>
+                <p>Almecenados: {item.almacenados}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+        
     </div>
   )
 }

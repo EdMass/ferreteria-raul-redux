@@ -9,20 +9,28 @@ const Proveedor = () => {
     const proveedor = useSelector(store => store.proveedor.array)
     console.log(proveedor)
 
+    React.useEffect(() => {
+        dispatch(obtenerProveedorAccion()) 
+      }, [dispatch])
+
   return (
     <div>
-        Proveedores
         <br />
-        <button onClick={() => dispatch(obtenerProveedorAccion()) }>Obtener Proveedores</button>
-        <ul>
-            {
-                proveedor.map(item =>(
-                    <li key={item.id} >
-                        Nombre: {item.nombre}, Documento: {item.idProveedor}, Celular: {item.celular} 
-                    </li>
-                ))
-            }
-        </ul>
+       <div className="row">
+        {proveedor.map((item) => (
+          <div key={item.id} className="col mb-4">
+            <div className="card" style={{ minWidth: "230px" }}>
+              
+              <div className="card-body">
+                <h5>{item.nombre}</h5>
+                <p>Documento: {item.idProveedor}</p>
+                <p>Celular: {item.celular} </p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+        
     </div>
   )
 }
