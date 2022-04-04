@@ -3,9 +3,12 @@ import thunk from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
  
 import clienteReducer from './clienteDucks'
+import productoReducer from './productoDucks'
  
 const rootReducer = combineReducers({
-    clientes: clienteReducer
+    clientes: clienteReducer,
+    productos : productoReducer,
+    
 })
  
 export default function generateStore() {

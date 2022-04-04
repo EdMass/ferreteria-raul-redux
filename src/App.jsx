@@ -27,7 +27,7 @@ function App() {
     <Router>
       <div className="container">
         <Navbar firebaseUser={firebaseUser} />
-        
+        <br />
         <Routes>
           <Route path="/" element={<div>Inicio... </div>} />
           <Route path="/login" element={<Login />} />
@@ -36,7 +36,10 @@ function App() {
         </Routes>
       </div>
     </Router>
-  ) : <h2>Cargandoles...</h2>
+  ) : <button className="btn btn-primary" type="button" disabled>
+  <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+  Loading...
+</button>
 }
 
 export default App;

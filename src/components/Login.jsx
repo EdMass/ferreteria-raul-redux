@@ -179,7 +179,7 @@ const Login = () => {
               style={{ margin: "0 auto" }}
               onClick={SignInGitHub}
             >
-              <i class="fa-brands fa-github-alt me-2"></i>
+              <i className="fa-brands fa-github-alt me-2"></i>
               Accede con GitHub
             </button>
           </div>

@@ -3,6 +3,7 @@ import fireApp from "../firebase/firebase";
 import { getAuth } from "firebase/auth";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Clientes from "./Clientes";
+import Productos from "./Productos";
 
 const auth = getAuth(fireApp);
 
@@ -13,6 +14,10 @@ const Admin = () => {
 
   const handlerCliente = () => {
     navigate("/admin/clientes");
+  };
+
+  const handlerProducto = () => {
+    navigate("/admin/productos");
   };
 
   React.useEffect(() => {
@@ -26,23 +31,37 @@ const Admin = () => {
   }, [navigate]);
 
   return (
-    <div>
-      {user && <h3>{user.email}</h3>}
-
-      <button
-        className="btn btn-dark btn-sm  "
-        type="button"
-        style={{ margin: "0 auto" }}
-        onClick={handlerCliente}
-      >
-        Clientes
-      </button>
-      <br />
+    <div className="">
+       <div
+      class="btn-group"
+      role="group"
+      aria-label="Basic example"
+    >
+  <button type="button" className="btn btn-dark btn-lg" onClick={handlerCliente}>Clientes</button>
+  <button type="button" className="btn btn-dark btn-lg" onClick={handlerProducto} >Productos</button>
+  <button type="button" className="btn btn-dark btn-lg">Right</button>     
+      
+    </div>
+    <br />
       <Routes>
         <Route path="/clientes" element={<Clientes />} />
+        <Route path="/productos" element={<Productos />} />
       </Routes>
     </div>
+   
   );
 };
 
 export default Admin;
+/*
+ {user && <h3>{user.email}</h3>}
+<button
+        className="btn btn-dark btn-sm  "
+        type="button"
+        style={{ margin: "0 auto" }}
+        
+      >
+        
+      </button>
+
+*/
