@@ -5,6 +5,7 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import Clientes from "./Clientes";
 import Productos from "./Productos";
 import Vendedor from "./Vendedor";
+import Proveedor from "./Proveedor";
 
 const auth = getAuth(fireApp);
 
@@ -23,6 +24,10 @@ const Admin = () => {
 
   const handlerVendedor = () => {
     navigate("/admin/vendedor");
+  };
+
+  const handlerProveedor = () => {
+    navigate("/admin/proveedor");
   };
 
   React.useEffect(() => {
@@ -44,7 +49,8 @@ const Admin = () => {
     >
   <button type="button" className="btn btn-dark btn-lg" onClick={handlerCliente}>Clientes</button>
   <button type="button" className="btn btn-dark btn-lg" onClick={handlerProducto} >Productos</button>
-  <button type="button" className="btn btn-dark btn-lg" onClick={handlerVendedor}>Vendedor</button>     
+  <button type="button" className="btn btn-dark btn-lg" onClick={handlerVendedor}>Vendedor</button>  
+  <button type="button" className="btn btn-dark btn-lg" onClick={handlerProveedor}>Proveedor</button>    
       
     </div>
     <br />
@@ -52,6 +58,7 @@ const Admin = () => {
         <Route path="/clientes" element={<Clientes />} />
         <Route path="/productos" element={<Productos />} />
         <Route path="/vendedor" element={<Vendedor />} />
+        <Route path="/proveedor" element={<Proveedor />} />
       </Routes>
     </div>
    
